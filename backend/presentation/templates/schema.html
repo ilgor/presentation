@@ -1,0 +1,49 @@
+{% extends "layout.html" %} {% block content %}
+
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item"><a class="nav-link" href="schema"> <i class="fa fa-refresh" aria-hidden="true"></i> Refresh</a></li>
+    <!-- <li class="nav-item"><a class="nav-link" href="logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li> -->
+  </ul>
+</nav>
+
+<form action="/schema" method="POST" id="left-or-right">
+  <div class="float-right">
+    {% if last_page %}
+      <input type="submit" class="btn btn-primary" value="Back" name="backButton"/>
+      <input type="submit" class="btn btn-primary" value="Next" disabled="disabled"/>
+    {% elif first_page %}
+      <input type="submit" class="btn btn-primary" value="Back" name="backButton" disabled="disabled"/>
+      <input type="submit" class="btn btn-primary" value="Next" name="nextButton"/>
+    {% else %}
+      <input type="submit" class="btn btn-primary" value="Back" name="backButton"/>
+      <input type="submit" class="btn btn-primary" value="Next" name="nextButton"/>
+    {% endif %}
+  </div>
+</form>
+
+<div class="container-fluid">
+  <h3 class="mt-4 mb-4">{{ data.description }}</h3>
+  <table style="border: 1px solid black;">
+    {% for key in data %}
+      {% if "top" in key or "right" in key or "left" in key or "bottom" in key or "sound" in key or "screen5" in key %}
+      <tr>
+        <th style="text-align: center; border: 1px solid black; background-color: gray; padding: 3vw;">{{ key }}</th>
+        <td style="height: 90px; vertical-align: middle; border: 1px solid black;" title="{{data[key]}}">
+          <pre style="margin: 0;">{{ data[key]|tojson_pretty|replace("{", "")|replace("}", "")|safe }}</pre>
+        </td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+  </table>
+
+  <hr style="margin-top: 50vh;" />
+
+  <footer class="page-footer font-small stylish-color-dark pt-4">
+    <div class="footer-copyright text-center py-3">
+      © 2021 Copyright: <a href="https://www.murrayboyd.com/OrderOfTheCIPHER/index.html">Murray Boyd</a>
+    </div>
+  </footer>
+</div>
+
+{% endblock %}

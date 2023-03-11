@@ -1,0 +1,22 @@
+.DS_Store
+
+.env/
+.vscode/
+
+node_modules
+frontend/build
+
+backend/**/*.pyc 
+backend/__pycache__/*
+backend/presentation/templates/index.html
+backend/schema.json
+
+media/*
+
+# backend/database.db
+backend/users.csv
+
+backend/presentation/templates/index.html
+frontend/build/*
+frontend/build/static/css/*
+

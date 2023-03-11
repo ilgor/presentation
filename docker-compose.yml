@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  media:
+    build: media/
+    container_name: media
+    volumes:
+      - ./media/nginx.conf:/usr/local/nginx/conf/nginx.conf
+      - ./media/:/opt/static/
+    ports:
+      - 3030:80
+  backend:
+    build: backend/
+    container_name: backend
+    volumes:
+      - ./frontend/build/static:/static/
+      - ./backend/schema.json:/backend/schema.json
+    ports:
+      - 5000:5000
